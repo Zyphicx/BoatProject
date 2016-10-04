@@ -1,4 +1,4 @@
-struct{ //A structure for each side of the boat 
+struct{ //A structure for each side of the boat
   const int TRANSPIN;
   const int MOTORPIN;
   int SIGNALS[10];
