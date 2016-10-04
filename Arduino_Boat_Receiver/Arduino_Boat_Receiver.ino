@@ -2,7 +2,12 @@ struct{ //A structure for each side of the boat
   const int TRANSPIN;
   const int MOTORPIN;
   int SIGNALS[10];
+<<<<<<< Updated upstream
 } RCVS[] = {4, 6, {5, 6}};
+=======
+  int curSig;
+} RCVS[] = {4, 6, {5, 6}, 2};
+>>>>>>> Stashed changes
 
 const int powerTwo = 6;
 
@@ -24,7 +29,13 @@ void loop(){
         /*Serial.print("Value: ");
         Serial.println(signalValue);
         Serial.println("-----------");*/
+<<<<<<< Updated upstream
         if(contains(RCVS[i].SIGNALS, signalValue, sizeof(RCVS[i].SIGNALS) / sizeof(RCVS[0].SIGNALS[0]))){
+=======
+        if(contains(RCVS[i].SIGNALS, signalValue, sizeof(RCVS[i].SIGNALS) / sizeof(RCVS[0].SIGNALS[0])) && signalValue >= RCVS[i].curSig){
+          if(signalValue > RCVS[i].curSig)
+             RCVS[i].curSig = signalValue;
+>>>>>>> Stashed changes
           analogWrite(RCVS[i].MOTORPIN, 255);
           delay(25);
         }else{
