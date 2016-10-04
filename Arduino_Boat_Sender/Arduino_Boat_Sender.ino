@@ -9,8 +9,10 @@ const int maxPower = 32;
 int randomValue;
 
 void setup() {
-  pinMode(LEDS[0].PIN, OUTPUT);
-  pinMode(LEDS[1].PIN, OUTPUT);
+  int i;
+  for(i = 0; i < sizeof(LEDS) / sizeof(LEDS[0]); i++){
+    pinMode(LEDS[i].PIN, OUTPUT);
+  }
   Serial.begin(9600);
 }
 
