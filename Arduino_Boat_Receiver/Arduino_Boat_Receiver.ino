@@ -16,13 +16,14 @@ void loop() {
       Serial.print("Value: ");
       Serial.println(signalValue);
       Serial.println("-----------");
-      if(signalValue == 2){
+      if(signalValue == 5){
         analogWrite(MOTOR, 255);
+        delay(25);
       }else{
-        analogWrite(MOTOR, 150);
+        analogWrite(MOTOR, 100);
       }
     }else{
-      analogWrite(MOTOR, 150);  
+      analogWrite(MOTOR, 100);  
     }
 }
 

@@ -11,11 +11,11 @@ void setup() {
 
 void loop(){
   int sig[powerTwo];
-  int valueToSend = 2;
+  int valueToSend = 5;
   Serial.println(valueToSend);
   valueToSignal(valueToSend, sig);
   sendSignal(LED, sig);
-  delay(100);
+  delay(50);
 }
 
 void sendSignal(int pin, int *sig){
