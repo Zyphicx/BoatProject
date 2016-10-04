@@ -1,13 +1,17 @@
 struct{ //A structure for each side of the boat
   const int TRANSPIN;
   const int MOTORPIN;
-} RCVS[] = {4, 6};
+  int SIGNALS[10];
+} RCVS[] = {4, 6, {5, 6}};
 
 const int powerTwo = 6;
 
 void setup() {
-  pinMode(RCVS[0].TRANSPIN, INPUT);
-  pinMode(RCVS[0].MOTORPIN, OUTPUT);
+  int i;
+  for(i = 0; i < sizeof(RCVS) / sizeof(RCVS[0]); i++){
+    pinMode(RCVS[i].TRANSPIN, INPUT);
+    pinMode(RCVS[i].MOTORPIN, OUTPUT);
+  }
   Serial.begin(9600);
 }
 
@@ -17,10 +21,10 @@ void loop(){
       if(digitalRead(RCVS[i].TRANSPIN) == HIGH){
         delayMicroseconds(1500);
         int signalValue = getSignal(RCVS[i].TRANSPIN);
-        Serial.print("Value: ");
+        /*Serial.print("Value: ");
         Serial.println(signalValue);
-        Serial.println("-----------");
-        if(signalValue == 5){
+        Serial.println("-----------");*/
+        if(contains(RCVS[i].SIGNALS, signalValue, sizeof(RCVS[i].SIGNALS) / sizeof(RCVS[0].SIGNALS[0]))){
           analogWrite(RCVS[i].MOTORPIN, 255);
           delay(25);
         }else{
@@ -45,4 +49,11 @@ int getSignal(int pin){
     delay(1);
   }
   return value;
+}
+
+int contains(int *arr, int num, int arrSize){
+  int i;
+  for(i = 0; i < arrSize; i++)
+    if(arr[i] == num)
+      return i;
 }
