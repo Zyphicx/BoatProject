@@ -55,5 +55,6 @@ int contains(int *arr, int num, int arrSize){
   int i;
   for(i = 0; i < arrSize; i++)
     if(arr[i] == num)
-      return i;
+      return i + 1;
+  return 0;
 }
