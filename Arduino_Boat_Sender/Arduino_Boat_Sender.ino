@@ -1,8 +1,8 @@
 struct{
   const int PIN;
   const int VALUE;  
-} LEDS[] = {4, 5,
-           7, 7};
+} LEDS[] = {4, 6,
+           7, 5};
 const int powerTwo = 6;
 const int maxPower = 32;
 

@@ -22,10 +22,11 @@ void loop(){
       if(digitalRead(RCVS[i].TRANSPIN) == HIGH){
         delayMicroseconds(1500);
         int signalValue = getSignal(RCVS[i].TRANSPIN);
-        /*Serial.print("Value: ");
+        Serial.print("Value: ");
         Serial.println(signalValue);
-        Serial.println("-----------");*/
+        Serial.println("-----------");
         if(contains(RCVS[i].SIGNALS, signalValue, sizeof(RCVS[i].SIGNALS) / sizeof(RCVS[0].SIGNALS[0])) && signalValue >= RCVS[i].curSig){
+          Serial.println("Running");
           if(signalValue > RCVS[i].curSig)
              RCVS[i].curSig = signalValue;
           analogWrite(RCVS[i].MOTORPIN, 255);
