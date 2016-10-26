@@ -26,7 +26,7 @@ void loop(){
     sendSignal(LEDS[i].PIN, sig);
     delay(1);
   }
-  delay(50);
+  delay(75);
 }
 
 void sendSignal(int pin, int *sig){

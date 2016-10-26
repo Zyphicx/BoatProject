@@ -3,7 +3,8 @@ struct{ //A structure for each side of the boat
   const int MOTORPIN;
   int SIGNALS[10];
   int curSig;
-} RCVS[] = {4, 6, {5, 6}, 2};
+} RCVS[] = {4, 6, {6}, 2,
+            5, 7, {5}, 3};
 
 const int powerTwo = 6;
 
@@ -32,10 +33,10 @@ void loop(){
           analogWrite(RCVS[i].MOTORPIN, 255);
           delay(25);
         }else{
-          analogWrite(RCVS[i].MOTORPIN, 100);
+          analogWrite(RCVS[i].MOTORPIN, 127); //CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
       }else{
-        analogWrite(RCVS[i].MOTORPIN, 100);  
+        analogWrite(RCVS[i].MOTORPIN, 127); //CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       }
   }
 }
