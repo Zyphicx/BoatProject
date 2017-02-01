@@ -5,10 +5,13 @@ struct{ //A structure for each side of the boat
   int STEER2;
   int SIGNALS[10];
   int curSig;
-} RCVS[] = {12, 9, 3, 2, {5}, 2,
-            13, 10, 7, 6, {6}, 3};
+} RCVS[] = {12, 9, 3, 2, {2, 3, 4}, 2,
+            13, 10, 7, 6, {5, 6, 7}, 3};
 
 const int powerTwo = 6;
+
+const int buttonPin = 11;
+int route = 1;
 
 int getSignal(int pin){
   int value = 0;
@@ -42,13 +45,20 @@ void setup() {
     pinMode(RCVS[i].STEER2, OUTPUT);
     digitalWrite(RCVS[i].STEER1, HIGH);
   }
+  pinMode(buttonPin, INPUT);
+  
   Serial.begin(9600);
 }
 
 void loop(){
+  if(digitalRead(buttonPin) == HIGH)
+    route = (route ? 0 : 1);
+  
   int i;
   for(i = 0; i < sizeof(RCVS) / sizeof(RCVS[0]); i++){
-    digitalWrite(RCVS[i].STEER1, HIGH);
+    digitalWrite(RCVS[i].STEER1, route);
+    digitalWrite(RCVS[i].STEER2, !route);
+    
     Serial.println(digitalRead(RCVS[i].TRANSPIN));
       if(digitalRead(RCVS[i].TRANSPIN) == HIGH){
         delayMicroseconds(1500);
@@ -65,10 +75,10 @@ void loop(){
           analogWrite(RCVS[i].MOTORPIN, 255);
           delay(1000);
         }else{
-          analogWrite(RCVS[i].MOTORPIN, 175); //CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          analogWrite(RCVS[i].MOTORPIN, 160); //CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         }
       }else{
-        analogWrite(RCVS[i].MOTORPIN, 175); //CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        analogWrite(RCVS[i].MOTORPIN, 160); //CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       }
   }
   delay(15);
